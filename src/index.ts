@@ -11,10 +11,9 @@ import { PassportGoogle } from "./config/passportGoogle";
 import { PortResolver } from "./resolvers/PortResolver";
 
 const app = express();
-PassportGoogle();
 useMiddleWares(app);
 
-app.get("/", (_, res) => res.send("<h1>Server is running...</h1>"));
+PassportGoogle();
 
 app.use(RouterPassport);
 
@@ -33,7 +32,7 @@ app.use(RouterPassport);
       return { req, res };
     },
   });
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT, () => {
     console.log(`Server is listening on port ${process.env.PORT}`);

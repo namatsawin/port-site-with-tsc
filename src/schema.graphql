@@ -35,6 +35,7 @@ type Portfolio {
 }
 
 type Query {
+  hello: String!
   me: User!
   myPort: Portfolio
   users: [User]!

@@ -12,6 +12,7 @@ router.get(
   "/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
+    prompt: "select_account",
     session: false,
   })
 );
@@ -46,10 +47,10 @@ router.get(
       });
 
       SendToken(CreateToken(newUser), res);
-      return res.redirect("/");
+      return res.redirect("http://localhost:3000/");
     } else {
       SendToken(CreateToken(existUser), res);
-      return res.redirect("/");
+      return res.redirect("http://localhost:3000/");
     }
   }
 );

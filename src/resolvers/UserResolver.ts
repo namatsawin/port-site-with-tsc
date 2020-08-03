@@ -11,6 +11,11 @@ export class UserResolver {
     return req.user;
   }
 
+  @Query(() => String)
+  hello() {
+    return "hello";
+  }
+
   @Query(() => [User], { nullable: "items" })
   async users() {
     return UserModel.find().sort({ createdAt: -1 });
