@@ -20,7 +20,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/",
+    failureRedirect: "/",
     session: false,
   }),
   async (req: MyRequest, res) => {
@@ -48,10 +48,10 @@ router.get(
       });
 
       SendToken(CreateToken(newUser), res);
-      return res.redirect("http://localhost:3000/");
+      return res.redirect("/");
     } else {
       SendToken(CreateToken(existUser), res);
-      return res.redirect("http://localhost:3000/");
+      return res.redirect("/");
     }
   }
 );

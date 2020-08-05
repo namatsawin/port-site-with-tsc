@@ -26,9 +26,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.0.0-rc.3"
-  },
-  "devDependencies": {
+    "type-graphql": "^1.0.0-rc.3",
     "@types/compression": "^1.7.0",
     "@types/bcrypt": "^3.0.0",
     "@types/concurrently": "^5.2.1",
