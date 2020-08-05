@@ -24,7 +24,7 @@ export type Query = {
 
 
 export type QueryWhoPortArgs = {
-  id: Scalars['String'];
+  handlePath: Scalars['String'];
 };
 
 /** User model */
@@ -41,6 +41,7 @@ export type User = {
 export type Portfolio = {
   __typename?: 'Portfolio';
   id: Scalars['ID'];
+  handlePath: Scalars['String'];
   avatar: Scalars['String'];
   resume: Scalars['String'];
   background: Scalars['String'];
@@ -120,6 +121,7 @@ export type MutationDeleteWorkArgs = {
 };
 
 export type LandingInput = {
+  handlePath: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   nickName: Scalars['String'];
@@ -152,7 +154,7 @@ export type DeleteWorkMutation = (
   { __typename?: 'Mutation' }
   & { deleteWork: (
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -178,7 +180,7 @@ export type EditAboutMutation = (
   { __typename?: 'Mutation' }
   & { editAbout?: Maybe<(
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -204,7 +206,7 @@ export type EditLandingMutation = (
   { __typename?: 'Mutation' }
   & { editLanding?: Maybe<(
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -230,7 +232,7 @@ export type EditResumeMutation = (
   { __typename?: 'Mutation' }
   & { editResume: (
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -256,7 +258,7 @@ export type EditWorkMutation = (
   { __typename?: 'Mutation' }
   & { editWork: (
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -301,7 +303,7 @@ export type MeQuery = (
 );
 
 export type WhoPortQueryVariables = Exact<{
-  id: Scalars['String'];
+  handlePath: Scalars['String'];
 }>;
 
 
@@ -309,7 +311,7 @@ export type WhoPortQuery = (
   { __typename?: 'Query' }
   & { whoPort?: Maybe<(
     { __typename?: 'Portfolio' }
-    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'about' | 'resume' | 'createdAt'>
+    & Pick<Portfolio, 'id' | 'avatar' | 'background' | 'handlePath' | 'about' | 'resume' | 'createdAt'>
     & { name: (
       { __typename?: 'Name' }
       & Pick<Name, 'firstName' | 'lastName' | 'nickName'>
@@ -333,6 +335,7 @@ export const DeleteWorkDocument = gql`
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -394,6 +397,7 @@ export const EditAboutDocument = gql`
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -455,6 +459,7 @@ export const EditLandingDocument = gql`
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -516,6 +521,7 @@ export const EditResumeDocument = gql`
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -577,6 +583,7 @@ export const EditWorkDocument = gql`
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -727,11 +734,12 @@ export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>;
 export const WhoPortDocument = gql`
-    query whoPort($id: String!) {
-  whoPort(id: $id) {
+    query whoPort($handlePath: String!) {
+  whoPort(handlePath: $handlePath) {
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
@@ -775,7 +783,7 @@ export const WhoPortDocument = gql`
  * @example
  * const { data, loading, error } = useWhoPortQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      handlePath: // value for 'handlePath'
  *   },
  * });
  */

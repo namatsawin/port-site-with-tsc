@@ -7,7 +7,14 @@ export class User {
   id: string;
 
   @Field()
-  @prop({ required: true, unique: true, trim: true, lowercase: true })
+  @prop({
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    minlength: 5,
+    maxlength: 30,
+  })
   username: string;
 
   @Field()

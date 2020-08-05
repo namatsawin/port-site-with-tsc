@@ -10,14 +10,17 @@ import { Portfolio, PortfolioModel } from "../entity/Portfolio";
 import { LandingInput, WorkInput } from "./inputTypes/portTypes";
 import { isAuth } from "../middleWares/Auth";
 import { MyContext } from "../interface/Context";
-import { User } from "../entity/User";
+import { User, UserModel } from "../entity/User";
+import { CreateToken, SendToken } from "../utils/jwtToken";
 
 @Resolver()
 export class PortResolver {
   @Query(() => Portfolio, { nullable: true })
-  async whoPort(@Arg("id") id: string): Promise<Portfolio | null> {
+  async whoPort(
+    @Arg("handlePath") handlePath: string
+  ): Promise<Portfolio | null> {
     const port = await PortfolioModel.findOne({
-      user: id,
+      handlePath: handlePath,
     });
 
     if (!port) throw new Error("Not found your portfolio.");
@@ -29,7 +32,7 @@ export class PortResolver {
   @UseMiddleware(isAuth)
   async editLanding(
     @Arg("data", () => LandingInput) data: LandingInput,
-    @Ctx() { req }: MyContext
+    @Ctx() { req, res }: MyContext
   ): Promise<Portfolio | null> {
     const { id } = req.user as User;
     const port = await PortfolioModel.findOneAndUpdate(
@@ -53,10 +56,21 @@ export class PortResolver {
             email: data.email,
             tel: data.tel,
           },
+          handlePath: data.handlePath,
         },
       },
       { new: true }
     );
+
+    const user = (await UserModel.findByIdAndUpdate(
+      id,
+      {
+        $set: { username: data.handlePath },
+      },
+      { new: true }
+    )) as User;
+
+    SendToken(CreateToken(user), res);
     return port;
   }
 

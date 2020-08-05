@@ -1,8 +1,9 @@
-query whoPort($id: String!) {
-  whoPort(id: $id) {
+query whoPort($handlePath: String!) {
+  whoPort(handlePath: $handlePath) {
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName

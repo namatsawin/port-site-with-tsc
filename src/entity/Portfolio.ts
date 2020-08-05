@@ -12,6 +12,17 @@ export class Portfolio {
   user: Ref<User>;
 
   @Field(() => String)
+  @prop({
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    minlength: 5,
+    maxlength: 30,
+  })
+  handlePath: string;
+
+  @Field(() => String)
   @prop({ default: "" })
   avatar: string;
 

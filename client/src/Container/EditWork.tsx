@@ -33,8 +33,8 @@ const EditWork = ({ currentPort, currentUser }: Props): React.ReactElement => {
     }
   };
 
-  if (userId !== currentUser?.id || !currentUser) return <Redirect to="/" />;
-  if (!currentPort) return <Redirect to={`/portfolio/${currentUser?.id}`} />;
+  if (userId !== currentUser?.username || !currentUser) return <Redirect to="/" />;
+  if (!currentPort) return <Redirect to={`/portfolio/${currentUser?.username}`} />;
   return (
     <Modal
       onDismiss={handleDismiss}

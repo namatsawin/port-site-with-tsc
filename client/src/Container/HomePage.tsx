@@ -21,7 +21,7 @@ const Home = ({ currentUser }: Props): React.ReactElement => {
   return (
     <HomeContainer>
       {currentUser ? (
-        <LinkNoneStyle to={`/portfolio/${currentUser.id}`}>
+        <LinkNoneStyle to={`/portfolio/${currentUser.username}`}>
           <Button variant="contained" color="secondary" size="large">
             Go to my port
           </Button>

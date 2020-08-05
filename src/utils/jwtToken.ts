@@ -4,7 +4,7 @@ import { User } from "../entity/User";
 
 export const CreateToken = (user: User) => {
   return sign(
-    { id: user.id, tokenVersion: user.tokenVersion },
+    { id: user.id, tokenVersion: user.tokenVersion, username: user.username },
     process.env.JWT_TOKEN_SECRET!,
     { expiresIn: "7d" }
   );

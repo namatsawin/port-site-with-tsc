@@ -3,6 +3,7 @@ mutation editAbout($about: String!) {
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName

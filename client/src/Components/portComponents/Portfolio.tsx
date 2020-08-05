@@ -22,7 +22,7 @@ const Portfolio = ({ currentPort, currentUser }: Props) => {
   const ResumeRef = useRef<HTMLHeadingElement>(null);
 
   React.useEffect(() => {
-    if (currentUser && currentUser.id === userId) {
+    if (currentUser && currentUser.username === userId) {
       setAllowEdit(true);
     }
     setOffSet({

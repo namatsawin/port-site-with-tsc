@@ -3,6 +3,7 @@ mutation editResume($resume: String!) {
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName

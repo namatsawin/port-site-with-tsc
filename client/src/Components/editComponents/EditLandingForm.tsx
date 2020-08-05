@@ -7,6 +7,12 @@ import * as yup from "yup";
 import { currentPort } from "../../redux/Port/port.interface";
 
 const LandingSchema = yup.object().shape({
+  handlePath: yup
+    .string()
+    .trim()
+    .required("This field is required.")
+    .min(5, "This field must be less then 5 chars.")
+    .max(30),
   email: yup.string().email("Invalid email."),
   fitsName: yup.string().trim().max(20),
   lastName: yup.string().trim().max(20),
@@ -34,6 +40,28 @@ const EditLandingForm = ({
 
   return (
     <form onSubmit={handleSubmit<LandingInput>(onSubmit)}>
+      <TextField
+        name="handlePath"
+        label="handlePath"
+        variant="outlined"
+        size="small"
+        style={{ width: "100%", margin: "5px 0" }}
+        defaultValue={currentPort?.handlePath}
+        inputRef={register}
+        error={!!errors.handlePath}
+      />
+      {errors.handlePath && (
+        <p
+          style={{
+            margin: "0 0 5px 0",
+            padding: 0,
+            color: "red",
+            fontSize: 14,
+          }}
+        >
+          {errors.handlePath.message}
+        </p>
+      )}
       <TextField
         name="avatar"
         label="Avatar URL"

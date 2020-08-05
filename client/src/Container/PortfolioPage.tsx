@@ -32,9 +32,9 @@ const PortfolioPage = ({ loader }: Props) => {
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
   const { data, loading, error } = useWhoPortQuery({
-    variables: { id },
+    variables: { handlePath: id },
   });
-  
+
   React.useEffect(() => {
     if (data) {
       store.dispatch({ type: "SetPort", payload: data.whoPort as any });

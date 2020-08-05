@@ -151,8 +151,8 @@ const Landing = ({ port, allowEdit }: Props): React.ReactElement => {
           </ItemDiv>
           <SocialDiv>
             <a
-              href={port.social.gitHup}
-              target="_blank"
+              href={port.social.gitHup || "#"}
+              target={port.social.gitHup && "_blank"}
               rel="noopener noreferrer"
             >
               <SocialButton disabled={!port.social.gitHup}>
@@ -164,8 +164,8 @@ const Landing = ({ port, allowEdit }: Props): React.ReactElement => {
               </SocialButton>
             </a>
             <a
-              href={port.social.linkedIn}
-              target="_blank"
+              href={port.social.linkedIn || "#"}
+              target={port.social.linkedIn && "_blank"}
               rel="noopener noreferrer"
             >
               <SocialButton disabled={!port.social.linkedIn}>
@@ -179,8 +179,8 @@ const Landing = ({ port, allowEdit }: Props): React.ReactElement => {
               </SocialButton>
             </a>
             <a
-              href={port.social.twitter}
-              target="_blank"
+              href={port.social.twitter || "#"}
+              target={port.social.twitter && "_blank"}
               rel="noopener noreferrer"
             >
               <SocialButton disabled={!port.social.twitter}>
@@ -194,13 +194,13 @@ const Landing = ({ port, allowEdit }: Props): React.ReactElement => {
               </SocialButton>
             </a>
             <a
-              href={port.social.faceBook}
-              target="_blank"
+              href={port.social.faceBook || "#"}
+              target={port.social.faceBook && "_blank"}
               rel="noopener noreferrer"
             >
               <SocialButton disabled={!port.social.faceBook}>
                 <FacebookIcon
-                  color={port.social.faceBook ? "inherit" : "disabled"}
+                  color={port.social.faceBook ? "primary" : "disabled"}
                 />
               </SocialButton>
             </a>

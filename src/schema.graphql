@@ -20,6 +20,7 @@ input LandingInput {
   faceBook: String!
   firstName: String!
   gitHup: String!
+  handlePath: String!
   lastName: String!
   linkedIn: String!
   nickName: String!
@@ -49,6 +50,7 @@ type Portfolio {
   background: String!
   contact: Contact!
   createdAt: DateTime!
+  handlePath: String!
   id: ID!
   name: Name!
   resume: String!
@@ -60,7 +62,7 @@ type Query {
   hello: String!
   me: User!
   users: [User]!
-  whoPort(id: String!): Portfolio
+  whoPort(handlePath: String!): Portfolio
 }
 
 type Social {

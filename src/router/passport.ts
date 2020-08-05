@@ -42,8 +42,9 @@ router.get(
         password: randomBytes(50).toString("base64"),
       });
 
-      await PortfolioModel.create<Pick<Portfolio, "user">>({
+      await PortfolioModel.create<Pick<Portfolio, "user" | "handlePath">>({
         user: newUser,
+        handlePath: `GOOGLE_${id}`,
       });
 
       SendToken(CreateToken(newUser), res);

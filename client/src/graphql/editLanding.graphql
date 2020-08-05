@@ -3,6 +3,7 @@ mutation editLanding($data: LandingInput!) {
     id
     avatar
     background
+    handlePath
     name {
       firstName
       lastName
