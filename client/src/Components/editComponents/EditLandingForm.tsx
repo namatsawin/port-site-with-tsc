@@ -49,6 +49,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.handlePath}
         inputRef={register}
         error={!!errors.handlePath}
+        autoComplete="off"
       />
       {errors.handlePath && (
         <p
@@ -71,6 +72,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.avatar}
         inputRef={register}
         error={!!errors.avatar}
+        autoComplete="off"
       />
       {errors.avatar && (
         <p
@@ -93,6 +95,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.background}
         inputRef={register}
         error={!!errors.background}
+        autoComplete="off"
       />{" "}
       {errors.background && (
         <p
@@ -115,6 +118,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.name.firstName}
         inputRef={register}
         error={!!errors.firstName}
+        autoComplete="off"
       />{" "}
       {errors.firstName && (
         <p
@@ -137,6 +141,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.name.lastName}
         inputRef={register}
         error={!!errors.lastName}
+        autoComplete="off"
       />{" "}
       {errors.lastName && (
         <p
@@ -159,6 +164,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.name.nickName}
         inputRef={register}
         error={!!errors.nickName}
+        autoComplete="off"
       />{" "}
       {errors.nickName && (
         <p
@@ -181,6 +187,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.social.gitHup}
         inputRef={register}
         error={!!errors.gitHup}
+        autoComplete="off"
       />{" "}
       {errors.gitHup && (
         <p
@@ -203,6 +210,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.social.linkedIn}
         inputRef={register}
         error={!!errors.linkedIn}
+        autoComplete="off"
       />{" "}
       {errors.linkedIn && (
         <p
@@ -225,6 +233,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.social.twitter}
         inputRef={register}
         error={!!errors.twitter}
+        autoComplete="off"
       />{" "}
       {errors.twitter && (
         <p
@@ -247,6 +256,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.social.faceBook}
         inputRef={register}
         error={!!errors.faceBook}
+        autoComplete="off"
       />{" "}
       {errors.faceBook && (
         <p
@@ -269,6 +279,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.contact.email}
         inputRef={register}
         error={!!errors.email}
+        autoComplete="off"
       />{" "}
       {errors.email && (
         <p
@@ -291,6 +302,7 @@ const EditLandingForm = ({
         defaultValue={currentPort?.contact.tel}
         inputRef={register}
         error={!!errors.tel}
+        autoComplete="off"
       />{" "}
       {errors.tel && (
         <p

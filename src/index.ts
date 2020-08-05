@@ -9,15 +9,17 @@ import { useMiddleWares } from "./config/middleWares";
 import RouterPassport from "./router/passport";
 import { PassportGoogle } from "./config/passportGoogle";
 import { PortResolver } from "./resolvers/PortResolver";
-
-const app = express();
-useMiddleWares(app);
-
-PassportGoogle();
-
-app.use(RouterPassport);
+import path from "path";
 
 (async () => {
+  const app = express();
+
+  useMiddleWares(app);
+
+  PassportGoogle();
+
+  app.use(RouterPassport);
+
   await ConnectMongoDb();
 
   const schema = await buildSchema({
@@ -33,6 +35,15 @@ app.use(RouterPassport);
     },
   });
   server.applyMiddleware({ app, cors: false });
+
+  if (process.env.NODE_ENV === "production") {
+    // Set static folder
+    app.use(express.static("client/build"));
+
+    app.get("*", (_req, res) => {
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+  }
 
   app.listen(process.env.PORT, () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
