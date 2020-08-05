@@ -13,7 +13,26 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+input LandingInput {
+  avatar: String!
+  background: String!
+  email: String!
+  faceBook: String!
+  firstName: String!
+  gitHup: String!
+  lastName: String!
+  linkedIn: String!
+  nickName: String!
+  tel: String!
+  twitter: String!
+}
+
 type Mutation {
+  deleteWork(workId: String!): Portfolio!
+  editAbout(about: String!): Portfolio
+  editLanding(data: LandingInput!): Portfolio
+  editResume(resume: String!): Portfolio!
+  editWork(work: WorkInput!): Portfolio!
   logOut: String!
 }
 
@@ -26,10 +45,13 @@ type Name {
 """Portfolio model"""
 type Portfolio {
   about: String!
+  avatar: String!
+  background: String!
   contact: Contact!
   createdAt: DateTime!
   id: ID!
   name: Name!
+  resume: String!
   social: Social!
   works: [Works!]!
 }
@@ -37,8 +59,8 @@ type Portfolio {
 type Query {
   hello: String!
   me: User!
-  myPort: Portfolio
   users: [User]!
+  whoPort(id: String!): Portfolio
 }
 
 type Social {
@@ -56,8 +78,19 @@ type User {
   username: String!
 }
 
+input WorkInput {
+  description: String!
+  id: String!
+  name: String!
+  previewImage: String!
+  skillsUsed: [String!]!
+  viewDemo: String!
+  viewGitHup: String!
+}
+
 type Works {
   description: String!
+  id: ID!
   name: String!
   previewImage: String!
   skillsUsed: [String!]!

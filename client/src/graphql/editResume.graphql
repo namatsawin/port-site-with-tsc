@@ -1,0 +1,34 @@
+mutation editResume($resume: String!) {
+  editResume(resume: $resume) {
+    id
+    avatar
+    background
+    name {
+      firstName
+      lastName
+      nickName
+    }
+    social {
+      gitHup
+      faceBook
+      linkedIn
+      twitter
+    }
+    contact {
+      email
+      tel
+    }
+    works {
+      id
+      name
+      description
+      previewImage
+      viewDemo
+      viewGitHup
+      skillsUsed
+    }
+    about
+    resume
+    createdAt
+  }
+}

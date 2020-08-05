@@ -21,7 +21,7 @@ export const SetAlert = ({ message, type }: SetParams) => (
     payload,
   });
 
-  setTimeout(() => dispatch(RemoveAlert(payload)), 5000);
+  setTimeout(() => dispatch(RemoveAlert(payload)), 3000);
 };
 
 const RemoveAlert = (payload: alert): AlertTypes => ({

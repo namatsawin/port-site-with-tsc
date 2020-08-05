@@ -5,7 +5,7 @@ import { JwtPayload } from "../interface/auth";
 import { UserModel, User } from "../entity/User";
 
 export const isAuth: MiddlewareFn<MyContext> = async (
-  { context: { req } },
+  { context: { req, res } },
   next
 ) => {
   const token = req.cookies[process.env.JWT_TOKEN_NAME!];
@@ -22,8 +22,11 @@ export const isAuth: MiddlewareFn<MyContext> = async (
 
     req.user = user;
   } catch (err) {
-    console.log(err);
-    throw new Error("Not authenticated");
+    if (req.cookies[process.env.JWT_TOKEN_NAME!]) {
+      res.clearCookie(process.env.JWT_TOKEN_NAME!);
+    }
+    console.error(err);
+    throw new err();
   }
 
   return next();

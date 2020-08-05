@@ -1,4 +1,4 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 import { prop } from "@typegoose/typegoose";
 
 @ObjectType()
@@ -40,22 +40,24 @@ export class Contact {
 
 @ObjectType()
 export class Works {
+  @Field(() => ID)
+  id: string;
   @Field(() => String)
-  @prop({ default: "" })
+  @prop()
   name: string;
   @Field(() => String)
-  @prop({ default: "" })
+  @prop()
   previewImage: string;
   @Field(() => String)
-  @prop({ default: "" })
+  @prop()
   description: string;
   @Field(() => String)
-  @prop({ default: "" })
+  @prop()
   viewDemo: string;
   @Field(() => String)
-  @prop({ default: "" })
+  @prop()
   viewGitHup: string;
   @Field(() => [String])
-  @prop({ default: [] })
-  skillsUsed: [string];
+  @prop({ type: Array, items: String })
+  skillsUsed: string[];
 }

@@ -11,7 +11,19 @@ export class Portfolio {
   @prop({ ref: User, required: true })
   user: Ref<User>;
 
-  @Field()
+  @Field(() => String)
+  @prop({ default: "" })
+  avatar: string;
+
+  @Field(() => String)
+  @prop({ default: "" })
+  resume: string;
+
+  @Field(() => String)
+  @prop({ default: "" })
+  background: string;
+
+  @Field(() => Name)
   @prop({ default: new Name() })
   name: Name;
 
@@ -20,8 +32,8 @@ export class Portfolio {
   social: Social;
 
   @Field(() => [Works])
-  @prop({ default: [] })
-  works: [Works];
+  @prop({ type: Array, items: Works })
+  works: Works[];
 
   @Field(() => Contact)
   @prop({ default: new Contact() })

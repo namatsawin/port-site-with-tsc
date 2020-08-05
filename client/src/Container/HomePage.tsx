@@ -3,6 +3,8 @@ import { connect, ConnectedProps } from "react-redux";
 import styled from "styled-components";
 import AuthButton from "../Components/AuthButton";
 import { MyReducers } from "../redux/rootReducer";
+import { Button } from "@material-ui/core";
+import LinkNoneStyle from "../Components/utilsComponents/LinkNoneStyle";
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -18,7 +20,15 @@ const HomeContainer = styled.div`
 const Home = ({ currentUser }: Props): React.ReactElement => {
   return (
     <HomeContainer>
-      {currentUser ? <h1>Logged In</h1> : <AuthButton />}
+      {currentUser ? (
+        <LinkNoneStyle to={`/portfolio/${currentUser.id}`}>
+          <Button variant="contained" color="secondary" size="large">
+            Go to my port
+          </Button>
+        </LinkNoneStyle>
+      ) : (
+        <AuthButton />
+      )}
     </HomeContainer>
   );
 };

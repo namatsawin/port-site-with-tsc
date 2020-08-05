@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Typography, CardActionArea, Card } from "@material-ui/core/";
 import ProjectItem from "./ProjectItem";
 import AddIcon from "@material-ui/icons/Add";
+import LinkNoneStyle from "../utilsComponents/LinkNoneStyle";
+import { useRouteMatch } from "react-router-dom";
+import { Works } from "src/generated/graphql";
 
 const Container = styled.div`
   padding: 30px 10px;
@@ -26,7 +29,17 @@ const ProjectDiv = styled.div`
   }
 `;
 
-const Projects = (): React.ReactElement => {
+type myMatch = {
+  url: string;
+};
+
+type Props = {
+  works: Works[];
+  allowEdit: Boolean;
+};
+
+const Projects = ({ works, allowEdit }: Props): React.ReactElement => {
+  const { url } = useRouteMatch() as myMatch;
   return (
     <Container>
       <Typography
@@ -38,17 +51,26 @@ const Projects = (): React.ReactElement => {
         My Projects
       </Typography>
       <ProjectDiv>
-        <ProjectItem />
-        <ProjectItem />
-        <ProjectItem />
-        <ProjectItem />
-        <Card style={{ maxWidth: 345 }}>
-          <CardActionArea
-            style={{ height: "100%", display: "grid", placeItems: "center" }}
-          >
-            <AddIcon style={{ fontSize: 100 }} color="primary" />
-          </CardActionArea>
-        </Card>
+        {works.length > 0
+          ? works.map((w) => (
+              <ProjectItem key={w.id} work={w} allowEdit={allowEdit} />
+            ))
+          : null}
+        {allowEdit && (
+          <LinkNoneStyle to={`${url}/work/create`}>
+            <Card style={{ maxWidth: 345, height: "100%" }}>
+              <CardActionArea
+                style={{
+                  height: "100%",
+                  display: "grid",
+                  placeItems: "center",
+                }}
+              >
+                <AddIcon style={{ fontSize: 100 }} color="primary" />
+              </CardActionArea>
+            </Card>
+          </LinkNoneStyle>
+        )}
       </ProjectDiv>
     </Container>
   );

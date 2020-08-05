@@ -14,7 +14,7 @@ export type MyOffSet = {
   landing: number | undefined;
   project: number | undefined;
   about: number | undefined;
-  contact: number | undefined;
+
   resume: number | undefined;
 };
 
@@ -32,7 +32,6 @@ export const OffSetContextProvider = ({
     landing: 0,
     project: 0,
     about: 0,
-    contact: 0,
     resume: 0,
   });
 

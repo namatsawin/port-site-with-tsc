@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^4.0.0",
+    "@hookform/resolvers": "^0.1.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -16,19 +17,24 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
     "graphql": "^15.3.0",
+    "history": "^5.0.0",
     "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.3.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "yup": "^0.29.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -58,12 +64,15 @@
     "@graphql-codegen/typescript-operations": "1.17.6",
     "@graphql-codegen/typescript-react-apollo": "1.17.6",
     "@types/graphql": "^14.5.0",
+    "@types/history": "^4.7.7",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-thunk": "^2.1.0",
+    "@types/reselect": "^2.2.0",
     "@types/styled-components": "^5.1.2",
-    "@types/uuid": "^8.0.0"
+    "@types/uuid": "^8.0.0",
+    "@types/yup": "^0.29.4"
   }
 }

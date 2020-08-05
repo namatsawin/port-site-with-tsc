@@ -28,7 +28,7 @@ export class UserResolver {
     try {
       await UserModel.findByIdAndUpdate(id, {
         $set: { tokenVersion: tokenVersion + 1 },
-      });
+      }); 
       res.clearCookie(process.env.JWT_TOKEN_NAME!);
       return "Logout successfully.";
     } catch (error) {

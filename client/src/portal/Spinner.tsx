@@ -19,13 +19,14 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "fixed",
       top: 0,
       left: 0,
+      zIndex: 9999,
     },
   })
 );
 
 type Props = {
   isLoading: Boolean;
-}
+};
 
 const Container = document.createElement("div");
 const SpinnerRoot = document.querySelector("#spinner");

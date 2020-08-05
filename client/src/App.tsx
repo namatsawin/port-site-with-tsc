@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import HomePage from "./Container/HomePage";
 import PortfolioPage from "./Container/PortfolioPage";
 import { useMeQuery } from "./generated/graphql";
@@ -23,8 +23,10 @@ const App = (): React.ReactElement => {
       <AlertMessage />
       <LogoutButton />
       <BrowserRouter>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/portfolio/:id" component={PortfolioPage} />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/portfolio/:id" component={PortfolioPage} />
+        </Switch>
       </BrowserRouter>
       <Spinner isLoading={loading} />
     </OffSetContextProvider>
