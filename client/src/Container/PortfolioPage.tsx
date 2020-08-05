@@ -13,6 +13,7 @@ import Spinner from "../portal/Spinner";
 import store from "../redux/store";
 import { MyReducers } from "../redux/rootReducer";
 import { connect, ConnectedProps } from "react-redux";
+import FallBackSpinner from "../Components/FallBackSpinner";
 
 const PortContainer = styled.div`
   background-color: #e5e5e5;
@@ -49,7 +50,7 @@ const PortfolioPage = ({ loader }: Props) => {
     };
   }, [data, id, error]);
 
-  if (!data && loading) return <Spinner isLoading={loading} />;
+  if (!data && loading) return <FallBackSpinner />;
   if (error) return <Redirect to="/" />;
   return (
     <PortContainer>
