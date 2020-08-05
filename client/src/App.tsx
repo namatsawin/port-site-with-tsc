@@ -7,6 +7,7 @@ import { OffSetContextProvider } from "./Context/storeOffset";
 import LogoutButton from "./Components/LogoutButton";
 import AlertMessage from "./Components/AlertMessage";
 import FallBacSpinner from "./Components/FallBackSpinner";
+import ErrorBoundary from "./Components/ErrorBoundary";
 
 const HomePage = lazy(() => import("./Container/HomePage"));
 const PortfolioPage = lazy(() => import("./Container/PortfolioPage"));
@@ -24,12 +25,14 @@ const App = (): React.ReactElement => {
       <AlertMessage />
       <LogoutButton />
       <BrowserRouter>
-        <Switch>
-          <Suspense fallback={FallBacSpinner}>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/portfolio/:id" component={PortfolioPage} />
-          </Suspense>
-        </Switch>
+        <ErrorBoundary>
+          <Switch>
+            <Suspense fallback={FallBacSpinner}>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/portfolio/:id" component={PortfolioPage} />
+            </Suspense>
+          </Switch>
+        </ErrorBoundary>
       </BrowserRouter>
       <Spinner isLoading={loading} />
     </OffSetContextProvider>

@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../portal/Modal";
-import { useRouteMatch, useHistory, Redirect } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { MyReducers } from "../redux/rootReducer";
 import { ConnectedProps, connect } from "react-redux";
 import EditLandingForm from "../Components/editComponents/EditLandingForm";
@@ -33,10 +33,9 @@ const EditLanding = ({
     history.push(url.substring(0, url.length - 13));
   };
 
-  if (userId !== currentUser?.username || !currentUser)
-    return <Redirect to="/" />;
-  if (!currentPort)
-    return <Redirect to={`/portfolio/${currentUser.username}`} />;
+  if (userId !== currentUser?.username || !currentUser || !currentPort) {
+    history.push(url.substring(0, url.length - 13));
+  }
   return (
     <Modal
       onDismiss={() => history.push(url.substring(0, url.length - 13))}

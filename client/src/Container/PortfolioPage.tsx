@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from "../Components/portComponents/Navbar";
-import { Route, useRouteMatch, Redirect } from "react-router-dom";
+import { Route, useRouteMatch } from "react-router-dom";
 import Portfolio from "../Components/portComponents/Portfolio";
 import { OffSetContext, MyStoreOffset } from "../Context/storeOffset";
 import EditLanding from "./EditLanding";
@@ -51,7 +51,7 @@ const PortfolioPage = ({ loader }: Props) => {
   }, [data, id, error]);
 
   if (!data && loading) return <FallBackSpinner />;
-  if (error) return <Redirect to="/" />;
+  if (error) throw error;
   return (
     <PortContainer>
       <Navbar offset={offset} />
