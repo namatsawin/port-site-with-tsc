@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   action: {
     display: "flex",
     justifyContent: "center",
-    marginTop:'auto'
+    marginTop: "auto",
   },
   button: {
     width: "100%",
@@ -123,7 +123,9 @@ export default function ProjectItem({ work, allowEdit }: Props) {
           )}
         </CardActions>
       </CardMedia>
-      <CardContent style={{ wordBreak: "break-word" }}>
+      <CardContent
+        style={{ wordBreak: "break-word", height: "100%", padding: 10 }}
+      >
         <Typography gutterBottom variant="h5" component="h2">
           {work.name || "???"}
         </Typography>
@@ -141,12 +143,8 @@ export default function ProjectItem({ work, allowEdit }: Props) {
         {work.skillsUsed.length > 0 && (
           <div
             style={{
-              height: 100,
-              overflowY: "auto",
-              overflowX: "hidden",
               border: "1px solid #ccc",
               borderRadius: 3,
-              padding: 5,
             }}
           >
             {work.skillsUsed.map((s, i) => (

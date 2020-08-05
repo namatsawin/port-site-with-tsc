@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useLogOutMutation } from "src/generated/graphql";
 import { SetUser } from "src/redux/User/user.action";
+import Spinner from "../portal/Spinner";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const LogoutButton = ({
   SetUser,
 }: Props): React.ReactElement | null => {
   const classes = useStyles();
-  const [logOut] = useLogOutMutation();
+  const [logOut, { loading }] = useLogOutMutation();
 
   const handleLogout = () => {
     logOut()
@@ -32,7 +33,9 @@ const LogoutButton = ({
   };
 
   if (!currentUser) return null;
-  return (
+  return loading ? (
+    <Spinner isLoading={loading} />
+  ) : (
     <Button
       onClick={handleLogout}
       variant="contained"
