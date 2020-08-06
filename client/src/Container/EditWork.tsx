@@ -1,6 +1,11 @@
 import React from "react";
 import Modal from "../portal/Modal";
-import { useRouteMatch, useHistory, useParams } from "react-router-dom";
+import {
+  useRouteMatch,
+  useHistory,
+  useParams,
+  Redirect,
+} from "react-router-dom";
 import { MyReducers } from "../redux/rootReducer";
 import { connect, ConnectedProps } from "react-redux";
 import EditWorkForm from "../Components/editComponents/EditWorkForm";
@@ -28,9 +33,8 @@ const EditWork = ({ currentPort, currentUser }: Props): React.ReactElement => {
     }
   };
 
-  if (userId !== currentUser?.username || !currentUser || !currentPort) {
-    history.push(url.substring(0, url.length - 13));
-  }
+  if (userId !== currentUser?.username || !currentUser || !currentPort)
+    return <Redirect to={`/portfolio/${userId}`} />;
   return (
     <Modal
       onDismiss={handleDismiss}

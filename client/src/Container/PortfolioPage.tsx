@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from "../Components/portComponents/Navbar";
-import { Route, useRouteMatch } from "react-router-dom";
+import { Route, useRouteMatch, Redirect } from "react-router-dom";
 import Portfolio from "../Components/portComponents/Portfolio";
 import { OffSetContext, MyStoreOffset } from "../Context/storeOffset";
 import EditLanding from "./EditLanding";
@@ -28,7 +28,7 @@ type myParams = {
   id: string;
 };
 
-const PortfolioPage = ({ SetPort, loader }: Props) => {
+const PortfolioPage = ({ SetPort, loader, currentPort }: Props) => {
   const { offset } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
@@ -40,14 +40,10 @@ const PortfolioPage = ({ SetPort, loader }: Props) => {
     if (data) {
       SetPort(data.whoPort as any);
     }
-
-    return () => {
-      SetPort(null);
-    };
   }, [data, id, SetPort]);
 
-  if (!data && loading) return <FallBackSpinner />;
-  if (error) throw error;
+  if (!currentPort && loading) return <FallBackSpinner />;
+  if (error) return <Redirect to="/" />;
   return (
     <PortContainer>
       <Navbar offset={offset} />
@@ -63,6 +59,7 @@ const PortfolioPage = ({ SetPort, loader }: Props) => {
 const mapStateToProps = (state: MyReducers) => {
   return {
     loader: state.loadReducer.isLoading,
+    currentPort: state.portReducer.currentPort,
   };
 };
 
