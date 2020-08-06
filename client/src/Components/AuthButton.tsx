@@ -8,6 +8,7 @@ const ButtonLogin = styled(Button)`
   padding: 0px 5px !important;
   width: 220px;
   background-color: #4285f4 !important;
+  margin:auto;
 `;
 
 const ButtonIconWrapper = styled.div`
