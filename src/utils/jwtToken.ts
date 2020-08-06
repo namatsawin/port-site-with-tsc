@@ -6,7 +6,7 @@ export const CreateToken = (user: User) => {
   return sign(
     { id: user.id, tokenVersion: user.tokenVersion, username: user.username },
     process.env.JWT_TOKEN_SECRET!,
-    { expiresIn: "7d" }
+    { expiresIn: "1d" }
   );
 };
 
