@@ -10,7 +10,7 @@ import RouterPassport from "./router/passport";
 import { PassportGoogle } from "./config/passportGoogle";
 import { PortResolver } from "./resolvers/PortResolver";
 import path from "path";
-// import { PortfolioModel } from "./entity/Portfolio";
+import { PortfolioModel } from "./entity/Portfolio";
 
 (async () => {
   await ConnectMongoDb();
@@ -23,10 +23,10 @@ import path from "path";
 
   app.use(RouterPassport);
 
-  // app.get("/api/portfolios", async (_req, res) => {
-  //   const ports = await PortfolioModel.find();
-  //   res.send(ports);
-  // });
+  app.get("/api/portfolios", async (_req, res) => {
+    const ports = await PortfolioModel.find();
+    res.send(ports);
+  });
 
   const schema = await buildSchema({
     resolvers: [UserResolver, PortResolver],
