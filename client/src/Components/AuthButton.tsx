@@ -35,7 +35,10 @@ const ButtonText = styled.p`
 
 const AuthButton = (): React.ReactElement => {
   return (
-    <a href="/auth/google" style={{ textDecoration: "none" }}>
+    <a
+      href={`${process.env.CLIENT_URL}/auth/google`}
+      style={{ textDecoration: "none" }}
+    >
       <ButtonLogin variant="contained">
         <ButtonIconWrapper>
           <ButtonIcon src="/images/GoogleLogo.svg" />
