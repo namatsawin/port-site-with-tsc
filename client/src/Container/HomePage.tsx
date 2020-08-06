@@ -6,6 +6,7 @@ import { MyReducers } from "../redux/rootReducer";
 import { Button, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LinkNoneStyle from "../Components/utilsComponents/LinkNoneStyle";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -18,29 +19,25 @@ const HomeContainer = styled.div`
   place-items: center;
 `;
 
-const Home = ({ currentUser }: Props): React.ReactElement => {
-  const [portName, setPortName] = React.useState("");
+const Home = ({ currentUser, ports }: Props): React.ReactElement => {
   const history = useHistory();
-  const handleKeyPress = (event: any) => {
-    if (event.key === "Enter" && event.shiftKey) {
-      return;
-    }
-    if (event.key === "Enter" && portName) {
-      event.preventDefault();
-      history.push(`/${portName}`);
-    }
+  const handleChange = (event: any, values: any) => {
+    history.push(`/${values.handlePath}`);
   };
+
   return (
     <HomeContainer>
       <div
         style={{ display: "grid", gridTemplateColumns: "auto", gridGap: 10 }}
       >
         {currentUser ? (
-          <LinkNoneStyle to={`/${currentUser.username}`}>
-            <Button variant="contained" color="secondary" size="large">
-              Go to my port
-            </Button>
-          </LinkNoneStyle>
+          <div style={{ margin: "auto" }}>
+            <LinkNoneStyle to={`/${currentUser.username}`}>
+              <Button variant="contained" color="secondary" size="large">
+                Go to my port
+              </Button>
+            </LinkNoneStyle>
+          </div>
         ) : (
           <AuthButton />
         )}
@@ -52,14 +49,20 @@ const Home = ({ currentUser }: Props): React.ReactElement => {
           }}
         >
           <h4 style={{ textAlign: "center" }}>Search Port</h4>
-          <TextField
-            variant="outlined"
+          <Autocomplete
+            options={ports}
+            getOptionLabel={(option) => option.handlePath}
+            style={{ width: 250 }}
             size="small"
-            autoComplete="off"
-            label="Portfolio"
-            placeholder="Search port..."
-            onChange={(e) => setPortName(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onChange={handleChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Portfolio path name"
+                variant="outlined"
+                onChange={(e) => console.log(e.target.value)}
+              />
+            )}
           />
         </div>
       </div>
@@ -69,6 +72,7 @@ const Home = ({ currentUser }: Props): React.ReactElement => {
 
 const mapStateToProps = (state: MyReducers) => ({
   currentUser: state.userReducer.currentUser,
+  ports: state.portReducer.ports,
 });
 
 const connector = connect(mapStateToProps);

@@ -13,6 +13,7 @@ import { MyReducers } from "../redux/rootReducer";
 import { connect, ConnectedProps } from "react-redux";
 import { SetPort } from "../redux/Port/port.action";
 import store from "../redux/store";
+import { SetAlert } from "../redux/alert/alert.action";
 import { useWhoPortQuery } from "../generated/graphql";
 
 const PortContainer = styled.div`
@@ -28,7 +29,7 @@ type myParams = {
   id: string;
 };
 
-const PortfolioPage = ({ SetPort, loader }: Props) => {
+const PortfolioPage = ({ SetPort, SetAlert, loader }: Props) => {
   const { offset } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
@@ -48,7 +49,10 @@ const PortfolioPage = ({ SetPort, loader }: Props) => {
     };
   }, [data, SetPort, loading]);
 
-  if (error) return <Redirect to="/" />;
+  if (error) {
+    SetAlert({ type: "info", message: "Portfolio not found." });
+    return <Redirect to="/" />;
+  }
   return (
     <PortContainer>
       <Navbar offset={offset} />
@@ -68,7 +72,7 @@ const mapStateToProps = (state: MyReducers, ownProps: any) => {
   };
 };
 
-const connector = connect(mapStateToProps, { SetPort });
+const connector = connect(mapStateToProps, { SetPort, SetAlert });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

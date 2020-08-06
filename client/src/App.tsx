@@ -9,6 +9,12 @@ import AlertMessage from "./Components/AlertMessage";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import HomePage from "./Container/HomePage";
 import PortfolioPage from "./Container/PortfolioPage";
+import axios from "axios";
+
+axios
+  .get("/api/portfolios")
+  .then((res) => store.dispatch({ type: "SetPorts", payload: res.data }))
+  .catch((err) => console.error(err));
 
 const App = (): React.ReactElement => {
   const { data, loading } = useMeQuery();
