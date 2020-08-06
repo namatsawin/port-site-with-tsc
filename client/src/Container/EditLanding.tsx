@@ -25,9 +25,15 @@ const EditLanding = ({
   const [editLanding] = useEditLandingMutation();
   const onSubmit = async (values: LandingInput) => {
     store.dispatch({ type: "SetLoading", payload: true });
-    const { data } = await editLanding({ variables: { data: values } });
-    if (data) {
-      SetAlert({ message: "Edited landing successfully.", type: "success" });
+    try {
+      const { data } = await editLanding({
+        variables: { data: values },
+      });
+      if (data) {
+        SetAlert({ message: "Edited landing successfully.", type: "success" });
+      }
+    } catch (error) {
+      SetAlert({ message: error.message, type: "error" });
     }
     store.dispatch({ type: "SetLoading", payload: false });
     history.push(url.substring(0, url.length - 13));

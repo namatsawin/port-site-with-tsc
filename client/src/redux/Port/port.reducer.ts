@@ -18,11 +18,6 @@ export default function (
         ...state,
         currentPort: action.payload,
       };
-    case "ClearPort":
-      return {
-        ...state,
-        currentPort: null,
-      };
 
     default:
       return state;

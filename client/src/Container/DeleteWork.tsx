@@ -6,6 +6,7 @@ import { useDeleteWorkMutation } from "../generated/graphql";
 import { connect, ConnectedProps } from "react-redux";
 import { SetAlert } from "../redux/alert/alert.action";
 import store from "../redux/store";
+import { MyReducers } from "../redux/rootReducer";
 
 type myMatch = {
   url: string;
@@ -15,9 +16,14 @@ type myParams = {
   id: string;
 };
 
-const DeleteWork = ({ SetAlert }: Props): React.ReactElement | null => {
+const DeleteWork = ({
+  currentPort,
+  currentUser,
+  SetAlert,
+}: Props): React.ReactElement | null => {
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
+  const userId = url.split("/")[2];
   const history = useHistory();
   const [deleteWork] = useDeleteWorkMutation();
 
@@ -31,6 +37,9 @@ const DeleteWork = ({ SetAlert }: Props): React.ReactElement | null => {
     history.push(url.substring(0, url.length - (13 + id.length)));
   };
 
+  if (userId !== currentUser?.username || !currentUser || !currentPort) {
+    history.push(url.substring(0, url.length - (13 + id.length)));
+  }
   return (
     <Modal
       onDismiss={() =>
@@ -63,7 +72,12 @@ const DeleteWork = ({ SetAlert }: Props): React.ReactElement | null => {
   );
 };
 
-const connector = connect(null, { SetAlert });
+const mapStateToProps = (state: MyReducers) => ({
+  currentUser: state.userReducer.currentUser,
+  currentPort: state.portReducer.currentPort,
+});
+
+const connector = connect(mapStateToProps, { SetAlert });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

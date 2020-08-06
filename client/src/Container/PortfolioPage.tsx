@@ -10,10 +10,10 @@ import DeleteWork from "./DeleteWork";
 import { useParams } from "react-router-dom";
 import { useWhoPortQuery } from "src/generated/graphql";
 import Spinner from "../portal/Spinner";
-import store from "../redux/store";
 import { MyReducers } from "../redux/rootReducer";
 import { connect, ConnectedProps } from "react-redux";
 import FallBackSpinner from "../Components/FallBackSpinner";
+import { SetPort } from "../redux/Port/port.action";
 
 const PortContainer = styled.div`
   background-color: #e5e5e5;
@@ -28,7 +28,7 @@ type myParams = {
   id: string;
 };
 
-const PortfolioPage = ({ loader }: Props) => {
+const PortfolioPage = ({ SetPort, loader }: Props) => {
   const { offset } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
@@ -38,17 +38,13 @@ const PortfolioPage = ({ loader }: Props) => {
 
   React.useEffect(() => {
     if (data) {
-      store.dispatch({ type: "SetPort", payload: data.whoPort as any });
-    }
-
-    if (error) {
-      store.dispatch({ type: "ClearPort", payload: null });
+      SetPort(data.whoPort as any);
     }
 
     return () => {
-      store.dispatch({ type: "ClearPort", payload: null });
+      SetPort(null);
     };
-  }, [data, id, error]);
+  }, [data, id, SetPort]);
 
   if (!data && loading) return <FallBackSpinner />;
   if (error) throw error;
@@ -70,7 +66,7 @@ const mapStateToProps = (state: MyReducers) => {
   };
 };
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps, { SetPort });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

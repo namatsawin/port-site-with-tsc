@@ -11,6 +11,7 @@ import ErrorBoundary from "./Components/ErrorBoundary";
 
 const HomePage = lazy(() => import("./Container/HomePage"));
 const PortfolioPage = lazy(() => import("./Container/PortfolioPage"));
+
 const App = (): React.ReactElement => {
   const { data, loading } = useMeQuery();
 
@@ -26,12 +27,12 @@ const App = (): React.ReactElement => {
       <LogoutButton />
       <BrowserRouter>
         <ErrorBoundary>
-          <Switch>
-            <Suspense fallback={FallBacSpinner}>
+          <Suspense fallback={<FallBacSpinner />}>
+            <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/portfolio/:id" component={PortfolioPage} />
-            </Suspense>
-          </Switch>
+            </Switch>
+          </Suspense>
         </ErrorBoundary>
       </BrowserRouter>
       <Spinner isLoading={loading} />
