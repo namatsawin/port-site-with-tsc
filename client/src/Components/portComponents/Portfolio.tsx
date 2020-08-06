@@ -16,7 +16,7 @@ const Portfolio = ({ currentPort, currentUser }: Props) => {
   const { setOffSet } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const [allowEdit, setAllowEdit] = React.useState(false);
-  const userId = url.split("/")[2];
+  const userId = url.split("/")[1];
   const LandingRef = useRef<HTMLHeadingElement>(null);
   const ProjectRef = useRef<HTMLHeadingElement>(null);
   const AboutRef = useRef<HTMLHeadingElement>(null);

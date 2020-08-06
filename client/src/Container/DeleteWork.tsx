@@ -23,7 +23,7 @@ const DeleteWork = ({
 }: Props): React.ReactElement | null => {
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
-  const userId = url.split("/")[2];
+  const userId = url.split("/")[1];
   const history = useHistory();
   const [deleteWork] = useDeleteWorkMutation();
 

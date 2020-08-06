@@ -18,7 +18,7 @@ const EditWork = ({ currentPort, currentUser }: Props): React.ReactElement => {
   const { id } = useParams() as myParams;
   const history = useHistory();
   const title = id.toLowerCase() === "create" ? "Create Work" : "Edit Work";
-  const userId = url.split("/")[2];
+  const userId = url.split("/")[1];
 
   const handleDismiss = () => {
     if (id.toLowerCase() === "create") {
