@@ -10,6 +10,8 @@ import ErrorBoundary from "./Components/ErrorBoundary";
 import HomePage from "./Container/HomePage";
 import PortfolioPage from "./Container/PortfolioPage";
 
+
+
 const App = (): React.ReactElement => {
   const { data, loading } = useMeQuery();
 
