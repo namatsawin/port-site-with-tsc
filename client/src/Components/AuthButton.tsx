@@ -32,13 +32,10 @@ const ButtonText = styled.p`
   font-size: 14px;
   letter-spacing: 0.2px;
 `;
-
+//http://portfolio-easy.herokuapp.com
 const AuthButton = (): React.ReactElement => {
   return (
-    <a
-      href="http://portfolio-easy.herokuapp.com/auth/google"
-      style={{ textDecoration: "none" }}
-    >
+    <a href="/auth/google" style={{ textDecoration: "none" }}>
       <ButtonLogin variant="contained">
         <ButtonIconWrapper>
           <ButtonIcon src="/images/GoogleLogo.svg" />

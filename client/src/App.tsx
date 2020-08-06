@@ -19,6 +19,11 @@ const App = (): React.ReactElement => {
     }
   }, [data]);
 
+  if (!data && !loading && window.location.pathname.includes("/portfolio/")) {
+    window.location.href = `https://5f2c162f193c30c6db744ae6--boring-noyce-43e1ba.netlify.app/${
+      window.location.pathname.split("/")[2]
+    }`;
+  }
   return (
     <OffSetContextProvider>
       <AlertMessage />

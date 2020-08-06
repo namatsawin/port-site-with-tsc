@@ -76,16 +76,13 @@ const Navbar = ({ offset }: MyProps) => {
   return (
     <AppBar position="fixed" color="transparent" className={classes.root}>
       <Toolbar>
-        <LinkNoneStyle to="/">
-          <IconButton
-            edge="start"
-            className={classes.homeButton}
-            color="inherit"
-            aria-label="home"
-          >
-            <HomeIcon />
-          </IconButton>
-        </LinkNoneStyle>
+        <div className={classes.homeButton}>
+          <LinkNoneStyle to="/">
+            <IconButton edge="start" color="inherit" aria-label="home">
+              <HomeIcon />
+            </IconButton>
+          </LinkNoneStyle>
+        </div>
 
         <div className={classes.menus}>
           <Button
