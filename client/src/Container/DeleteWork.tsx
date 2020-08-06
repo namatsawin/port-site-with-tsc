@@ -1,11 +1,6 @@
 import React from "react";
 import Modal from "../portal/Modal";
-import {
-  useRouteMatch,
-  useHistory,
-  useParams,
-  Redirect,
-} from "react-router-dom";
+import { useRouteMatch, useHistory, useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useDeleteWorkMutation } from "../generated/graphql";
 import { connect, ConnectedProps } from "react-redux";
@@ -43,7 +38,7 @@ const DeleteWork = ({
   };
 
   if (userId !== currentUser?.username || !currentUser || !currentPort)
-    return <Redirect to={`/portfolio/${userId}`} />;
+    history.push(url.substring(0, url.length - (13 + id.length)));
   return (
     <Modal
       onDismiss={() =>

@@ -6,8 +6,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useLogOutMutation } from "../generated/graphql";
 import { SetUser } from "../redux/User/user.action";
-import { SetAlert } from "../redux/alert/alert.action";
-import FallBackSpinner from "./FallBackSpinner";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,23 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const LogoutButton = ({
   currentUser,
   SetUser,
-  SetAlert,
 }: Props): React.ReactElement | null => {
   const classes = useStyles();
-  const [logOut, { loading }] = useLogOutMutation();
+  const [logOut] = useLogOutMutation();
 
   const handleLogout = async () => {
-    const { data } = await logOut();
-    if (data) {
-      SetUser(null);
-      SetAlert({ type: "success", message: data.logOut });
-    }
+    await logOut();
+    SetUser(null);
   };
 
   if (!currentUser) return null;
-  return loading ? (
-    <FallBackSpinner />
-  ) : (
+  return (
     <Button
       onClick={handleLogout}
       variant="contained"
@@ -56,7 +48,7 @@ const mapStateToProps = (state: MyReducers) => ({
   currentUser: state.userReducer.currentUser,
 });
 
-const connector = connect(mapStateToProps, { SetUser, SetAlert });
+const connector = connect(mapStateToProps, { SetUser });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

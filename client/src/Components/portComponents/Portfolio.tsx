@@ -11,6 +11,7 @@ import { MyReducers } from "src/redux/rootReducer";
 type myMatch = {
   url: string;
 };
+
 const Portfolio = ({ currentPort, currentUser }: Props) => {
   const { setOffSet } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
@@ -33,22 +34,23 @@ const Portfolio = ({ currentPort, currentUser }: Props) => {
     });
   }, [setOffSet, currentPort, setAllowEdit, currentUser, userId]);
 
-  if (!currentPort) return null;
   return (
-    <React.Fragment>
-      <div ref={LandingRef}>
-        <Landing port={currentPort} allowEdit={allowEdit} />
-      </div>
-      <div ref={ProjectRef}>
-        <Projects works={currentPort?.works} allowEdit={allowEdit} />
-      </div>
-      <div ref={AboutRef}>
-        <About about={currentPort?.about} allowEdit={allowEdit} />
-      </div>
-      <div ref={ResumeRef}>
-        <Resume resume={currentPort.resume} allowEdit={allowEdit} />
-      </div>
-    </React.Fragment>
+    currentPort && (
+      <React.Fragment>
+        <div ref={LandingRef}>
+          <Landing port={currentPort} allowEdit={allowEdit} />
+        </div>
+        <div ref={ProjectRef}>
+          <Projects works={currentPort?.works} allowEdit={allowEdit} />
+        </div>
+        <div ref={AboutRef}>
+          <About about={currentPort?.about} allowEdit={allowEdit} />
+        </div>
+        <div ref={ResumeRef}>
+          <Resume resume={currentPort.resume} allowEdit={allowEdit} />
+        </div>
+      </React.Fragment>
+    )
   );
 };
 

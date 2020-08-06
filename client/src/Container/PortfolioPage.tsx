@@ -42,7 +42,7 @@ const PortfolioPage = ({ SetPort, loader, currentPort }: Props) => {
     }
   }, [data, id, SetPort]);
 
-  if (!currentPort && loading) return <FallBackSpinner />;
+  if (!data && loading) return <FallBackSpinner />;
   if (error) return <Redirect to="/" />;
   return (
     <PortContainer>

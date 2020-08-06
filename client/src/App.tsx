@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { useMeQuery } from "./generated/graphql";
 import store from "./redux/store";
@@ -6,11 +6,9 @@ import Spinner from "./portal/Spinner";
 import { OffSetContextProvider } from "./Context/storeOffset";
 import LogoutButton from "./Components/LogoutButton";
 import AlertMessage from "./Components/AlertMessage";
-import FallBacSpinner from "./Components/FallBackSpinner";
 import ErrorBoundary from "./Components/ErrorBoundary";
-
-const HomePage = lazy(() => import("./Container/HomePage"));
-const PortfolioPage = lazy(() => import("./Container/PortfolioPage"));
+import HomePage from "./Container/HomePage";
+import PortfolioPage from "./Container/PortfolioPage";
 
 const App = (): React.ReactElement => {
   const { data, loading } = useMeQuery();
@@ -26,14 +24,12 @@ const App = (): React.ReactElement => {
       <AlertMessage />
       <LogoutButton />
       <BrowserRouter>
-        <ErrorBoundary>
-          <Suspense fallback={<FallBacSpinner />}>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/portfolio/:id" component={PortfolioPage} />
-            </Switch>
-          </Suspense>
-        </ErrorBoundary>
+        <Switch>
+          <ErrorBoundary>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/portfolio/:id" component={PortfolioPage} />{" "}
+          </ErrorBoundary>
+        </Switch>
       </BrowserRouter>
       <Spinner isLoading={loading} />
     </OffSetContextProvider>
