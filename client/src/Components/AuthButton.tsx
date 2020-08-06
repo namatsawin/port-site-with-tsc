@@ -37,7 +37,7 @@ const ButtonText = styled.p`
 const AuthButton = (): React.ReactElement => {
   return (
    
-    <a href="http://whispering-earth-91934.herokuapp.com/auth/google" style={{ textDecoration: "none" }}>
+    <a href="http://portfolio-care.herokuapp.com/auth/google" style={{ textDecoration: "none" }}>
       <ButtonLogin variant="contained">
         <ButtonIconWrapper>
           <ButtonIcon src="/images/GoogleLogo.svg" />
