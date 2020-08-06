@@ -12,7 +12,7 @@ import ApolloClient from "apollo-client";
 
 const client = new ApolloClient({
   link: createHttpLink({
-    uri: "http://portfolio-easy.herokuapp.com/graphql",
+    uri: "/graphql",
     credentials: "include",
   }),
   cache: new InMemoryCache(),
