@@ -233,7 +233,7 @@ const Landing = ({ port, allowEdit, user }: Props): React.ReactElement => {
           </ItemDiv>
           <ItemDiv>
             <PortURL
-              href={`https://5f2c162f193c30c6db744ae6--boring-noyce-43e1ba.netlify.app/${user}`}
+              href={`https://5f2c27a2b96dd4b505f73601--portfolio-easy.netlify.app/${user}`}
               target="_blank"
               rel="noopener noreferrer"
             >
