@@ -13,6 +13,8 @@ import path from "path";
 import { PortfolioModel } from "./entity/Portfolio";
 
 (async () => {
+  await ConnectMongoDb();
+
   const app = express();
 
   useMiddleWares(app);
@@ -25,8 +27,6 @@ import { PortfolioModel } from "./entity/Portfolio";
     const ports = await PortfolioModel.find();
     res.send(ports);
   });
-
-  await ConnectMongoDb();
 
   const schema = await buildSchema({
     resolvers: [UserResolver, PortResolver],
