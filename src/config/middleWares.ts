@@ -9,8 +9,8 @@ export const useMiddleWares = (app: Express) => {
   }
   app.use(
     cors({
-      // origin: "https://portfolio-easy.herokuapp.com",
-      origin: "http://localhost:3000",
+      origin: "https://portfolio-easy.herokuapp.com",
+      // origin: "http://localhost:3000",
       credentials: true,
     })
   );
