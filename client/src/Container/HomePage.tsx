@@ -3,8 +3,10 @@ import { connect, ConnectedProps } from "react-redux";
 import styled from "styled-components";
 import AuthButton from "../Components/AuthButton";
 import { MyReducers } from "../redux/rootReducer";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import LinkNoneStyle from "../Components/utilsComponents/LinkNoneStyle";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -17,7 +19,13 @@ const HomeContainer = styled.div`
   place-items: center;
 `;
 
-const Home = ({ currentUser }: Props): React.ReactElement => {
+const Home = ({ currentUser, ports }: Props): React.ReactElement => {
+  const history = useHistory();
+
+  const handleChange = (event: any, values: any) => {
+    history.push(`/${values.handlePath}`);
+  };
+
   return (
     <HomeContainer>
       <div
@@ -34,6 +42,30 @@ const Home = ({ currentUser }: Props): React.ReactElement => {
         ) : (
           <AuthButton />
         )}
+        <div
+          style={{
+            background: "rgba(255,255,255,0.4)",
+            padding: "0 10px 20px 10px",
+            borderRadius: 3,
+          }}
+        >
+          <h4 style={{ textAlign: "center" }}>Search Port</h4>
+          <Autocomplete
+            options={ports}
+            getOptionLabel={(option) => option.handlePath}
+            style={{ width: 250 }}
+            size="small"
+            onChange={handleChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Portfolio path name"
+                variant="outlined"
+                onChange={(e) => console.log(e.target.value)}
+              />
+            )}
+          />
+        </div>
       </div>
     </HomeContainer>
   );
@@ -41,6 +73,7 @@ const Home = ({ currentUser }: Props): React.ReactElement => {
 
 const mapStateToProps = (state: MyReducers) => ({
   currentUser: state.userReducer.currentUser,
+  ports: state.portReducer.ports,
 });
 
 const connector = connect(mapStateToProps);
