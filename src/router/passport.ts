@@ -20,7 +20,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/",
+    failureRedirect: "https://portfolio-care.herokuapp.com",
     session: false,
   }),
   async (req: MyRequest, res) => {
@@ -48,10 +48,10 @@ router.get(
       });
 
       SendToken(CreateToken(newUser), res);
-      return res.redirect("/");
+      return res.redirect("https://portfolio-care.herokuapp.com");
     } else {
       SendToken(CreateToken(existUser), res);
-      return res.redirect("/");
+      return res.redirect("https://portfolio-care.herokuapp.com");
     }
   }
 );
