@@ -36,7 +36,7 @@ const ButtonText = styled.p`
 const AuthButton = (): React.ReactElement => {
   return (
     <a
-      href={`${process.env.CLIENT_URL}/auth/google`}
+      href="http://portfolio-easy.herokuapp.com/auth/google"
       style={{ textDecoration: "none" }}
     >
       <ButtonLogin variant="contained">
