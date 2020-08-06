@@ -13,8 +13,6 @@ import path from "path";
 import { PortfolioModel } from "./entity/Portfolio";
 
 (async () => {
-  await ConnectMongoDb();
-
   const app = express();
 
   useMiddleWares(app);
@@ -22,6 +20,8 @@ import { PortfolioModel } from "./entity/Portfolio";
   PassportGoogle();
 
   app.use(RouterPassport);
+
+  await ConnectMongoDb();
 
   app.get("/api/portfolios", async (_req, res) => {
     const ports = await PortfolioModel.find();
