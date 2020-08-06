@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     ["/auth", "/api", "/graphql"],
     createProxyMiddleware({
-      target: "http://localhost:5000",
+      target: "https://localhost:5000",
     })
   );
 };
