@@ -1,11 +1,14 @@
-import { PortTypes, currentPort } from "./port.interface";
+import { PortTypes } from "./port.interface";
+import { Portfolio } from "src/generated/graphql";
 
 export interface PortState {
-  currentPort: currentPort | null;
+  currentPort: Portfolio | null;
+  ports: Array<Portfolio> | [];
 }
 
 const INITIAL_STATE = {
   currentPort: null,
+  ports: [],
 };
 
 export default function (
@@ -17,6 +20,11 @@ export default function (
       return {
         ...state,
         currentPort: action.payload,
+      };
+    case "SetPorts":
+      return {
+        ...state,
+        ports: action.payload,
       };
 
     default:

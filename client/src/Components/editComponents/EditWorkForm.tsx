@@ -44,7 +44,6 @@ const EditWorkForm = ({ work, SetAlert, back }: Props): React.ReactElement => {
   const [errSkill, setErrSkill] = React.useState(false);
   const [skill, setSkill] = React.useState("");
   const [addSkill, setAddSkill] = React.useState(false);
-
   const [editWork] = useEditWorkMutation();
 
   const { handleSubmit, register, errors } = useForm({

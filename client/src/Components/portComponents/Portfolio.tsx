@@ -38,11 +38,7 @@ const Portfolio = ({ currentPort, currentUser }: Props) => {
     currentPort && (
       <React.Fragment>
         <div ref={LandingRef}>
-          <Landing
-            port={currentPort}
-            user={currentUser?.username}
-            allowEdit={allowEdit}
-          />
+          <Landing port={currentPort} allowEdit={allowEdit} />
         </div>
         <div ref={ProjectRef}>
           <Projects works={currentPort?.works} allowEdit={allowEdit} />

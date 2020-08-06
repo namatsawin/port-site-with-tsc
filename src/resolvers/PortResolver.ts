@@ -15,6 +15,7 @@ import { CreateToken, SendToken } from "../utils/jwtToken";
 
 @Resolver()
 export class PortResolver {
+  
   @Query(() => Portfolio, { nullable: true })
   async whoPort(
     @Arg("handlePath") handlePath: string

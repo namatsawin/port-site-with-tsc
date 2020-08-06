@@ -34,18 +34,14 @@ import path from "path";
       return { req, res };
     },
   });
+
   server.applyMiddleware({ app, cors: false });
 
-  if (process.env.NODE_ENV === "production") {
-    // Set static folder
-    app.use(express.static("public"));
+  app.use(express.static("public"));
 
-    app.get("*", (_req, res) => {
-      res.sendFile(path.resolve(__dirname, "public", "index.html"));
-    });
-  }
-
-  app.listen(process.env.PORT, () => {
-    console.log(`Server is listening on port ${process.env.PORT}`);
+  app.get("*", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"));
   });
+
+  app.listen(process.env.PORT || 5000);
 })();

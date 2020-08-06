@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { LandingInput } from "../../generated/graphql";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
-import { currentPort } from "../../redux/Port/port.interface";
 
 const LandingSchema = yup.object().shape({
   handlePath: yup
@@ -27,7 +26,7 @@ const LandingSchema = yup.object().shape({
 });
 
 type Props = {
-  currentPort: currentPort;
+  currentPort: any;
   onSubmit: (values: LandingInput) => void;
 };
 const EditLandingForm = ({

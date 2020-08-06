@@ -19,11 +19,6 @@ const App = (): React.ReactElement => {
     }
   }, [data]);
 
-  if (!data && !loading && window.location.pathname.includes("/portfolio/")) {
-    window.location.href = `https://5f2c27a2b96dd4b505f73601--portfolio-easy.netlify.app/${
-      window.location.pathname.split("/")[2]
-    }`;
-  }
   return (
     <OffSetContextProvider>
       <AlertMessage />
@@ -32,7 +27,7 @@ const App = (): React.ReactElement => {
         <Switch>
           <ErrorBoundary>
             <Route exact path="/" component={HomePage} />
-            <Route path="/portfolio/:id" component={PortfolioPage} />{" "}
+            <Route path="/:id" component={PortfolioPage} />{" "}
           </ErrorBoundary>
         </Switch>
       </BrowserRouter>

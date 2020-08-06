@@ -100,21 +100,6 @@ const SocialButton = styled(IconButton)`
   }
 `;
 
-const PortURL = styled.a`
-  margin-top: 5px;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 5px 10px;
-  border: 1px solid rgb(63, 81, 181);
-  color: rgb(63, 81, 181);
-  text-decoration: none;
-  &:hover {
-    color: #f50057;
-  }
-`;
-
 type myMatch = {
   url: string;
 };
@@ -122,9 +107,8 @@ type myMatch = {
 type Props = {
   port: Portfolio;
   allowEdit: Boolean;
-  user: string | undefined;
 };
-const Landing = ({ port, allowEdit, user }: Props): React.ReactElement => {
+const Landing = ({ port, allowEdit }: Props): React.ReactElement => {
   const classes = useStyles();
   const { url } = useRouteMatch() as myMatch;
   const [offset, setOffset] = React.useState<any>(0);
@@ -231,15 +215,7 @@ const Landing = ({ port, allowEdit, user }: Props): React.ReactElement => {
               Tel: {port.contact.tel || "????"}
             </Typography>
           </ItemDiv>
-          <ItemDiv>
-            <PortURL
-              href={`https://5f2c27a2b96dd4b505f73601--portfolio-easy.netlify.app/${user}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Your port url for show.
-            </PortURL>
-          </ItemDiv>
+          
         </LandingCard>
       </Container>
     </React.Fragment>

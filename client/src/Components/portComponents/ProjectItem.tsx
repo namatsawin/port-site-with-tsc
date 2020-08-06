@@ -54,6 +54,9 @@ type Props = {
 export default function ProjectItem({ work, allowEdit }: Props) {
   const classes = useStyles();
   const { url } = useRouteMatch() as myMatch;
+
+  const id = work.id;
+
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -62,7 +65,7 @@ export default function ProjectItem({ work, allowEdit }: Props) {
       >
         {allowEdit && (
           <div style={{ textAlign: "right" }}>
-            <LinkNoneStyle to={`${url}/work/${work.id}`}>
+            <LinkNoneStyle to={`${url}/work/${id}`}>
               <IconButton
                 size="small"
                 style={{
@@ -73,7 +76,7 @@ export default function ProjectItem({ work, allowEdit }: Props) {
                 <EditIcon color="primary" />
               </IconButton>
             </LinkNoneStyle>
-            <LinkNoneStyle to={`${url}/work/${work.id}/delete`}>
+            <LinkNoneStyle to={`${url}/work/${id}/delete`}>
               <IconButton
                 size="small"
                 style={{
