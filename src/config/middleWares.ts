@@ -9,6 +9,7 @@ export const useMiddleWares = (app: Express) => {
   }
   app.use(
     cors({
+      origin: "http://immense-lowlands-43051.herokuapp.com",
       credentials: true,
     })
   );

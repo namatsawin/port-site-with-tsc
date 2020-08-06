@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from "../Components/portComponents/Navbar";
-import { Route, useRouteMatch, Redirect } from "react-router-dom";
+import { Route, useRouteMatch, Link } from "react-router-dom";
 import Portfolio from "../Components/portComponents/Portfolio";
 import { OffSetContext, MyStoreOffset } from "../Context/storeOffset";
 import EditLanding from "./EditLanding";
@@ -32,7 +32,7 @@ const PortfolioPage = ({ SetPort, loader, currentPort }: Props) => {
   const { offset } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
-  const { data, loading, error } = useWhoPortQuery({
+  const { data, loading } = useWhoPortQuery({
     variables: { handlePath: id },
   });
 
@@ -43,7 +43,17 @@ const PortfolioPage = ({ SetPort, loader, currentPort }: Props) => {
   }, [data, id, SetPort]);
 
   if (!data && loading) return <FallBackSpinner />;
-  if (error) return <Redirect to="/" />;
+  if (!data && !loading)
+    return (
+      <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+        <h3>
+          Portfolio not found.
+          <Link style={{ color: "#f50057" }} to="/">
+            Back home
+          </Link>
+        </h3>
+      </div>
+    );
   return (
     <PortContainer>
       <Navbar offset={offset} />

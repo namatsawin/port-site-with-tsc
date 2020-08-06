@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useLogOutMutation } from "../generated/graphql";
 import { SetUser } from "../redux/User/user.action";
+import FallBackSpinner from "./FallBackSpinner";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const LogoutButton = ({
   SetUser,
 }: Props): React.ReactElement | null => {
   const classes = useStyles();
-  const [logOut] = useLogOutMutation();
+  const [logOut, { loading }] = useLogOutMutation();
 
   const handleLogout = async () => {
     await logOut();
@@ -31,6 +32,7 @@ const LogoutButton = ({
   };
 
   if (!currentUser) return null;
+  if (loading) return <FallBackSpinner />;
   return (
     <Button
       onClick={handleLogout}
