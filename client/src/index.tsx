@@ -11,7 +11,10 @@ import { createHttpLink } from "apollo-link-http";
 import ApolloClient from "apollo-client";
 
 const client = new ApolloClient({
-  link: createHttpLink({ uri: "/graphql", credentials: "include" }),
+  link: createHttpLink({
+    uri: "/graphql",
+    credentials: "include",
+  }),
   cache: new InMemoryCache(),
 });
 

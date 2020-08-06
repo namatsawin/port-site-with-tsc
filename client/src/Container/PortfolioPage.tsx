@@ -12,8 +12,8 @@ import { useWhoPortQuery } from "src/generated/graphql";
 import Spinner from "../portal/Spinner";
 import { MyReducers } from "../redux/rootReducer";
 import { connect, ConnectedProps } from "react-redux";
-import FallBackSpinner from "../Components/FallBackSpinner";
 import { SetPort } from "../redux/Port/port.action";
+import store from "../redux/store";
 
 const PortContainer = styled.div`
   background-color: #e5e5e5;
@@ -28,12 +28,16 @@ type myParams = {
   id: string;
 };
 
+<<<<<<< HEAD
 const PortfolioPage = ({
   SetPort,
   loader,
   currentPort,
   currentUser,
 }: Props) => {
+=======
+const PortfolioPage = ({ SetPort, loader, currentUser }: Props) => {
+>>>>>>> efaac09e236f69eadcbf7fb6d185ab1dfac5dd1a
   const { offset } = useContext(OffSetContext) as MyStoreOffset;
   const { url } = useRouteMatch() as myMatch;
   const { id } = useParams() as myParams;
@@ -42,12 +46,14 @@ const PortfolioPage = ({
   });
 
   React.useEffect(() => {
+    store.dispatch({ type: "SetLoading", payload: loading });
     if (data) {
       SetPort(data.whoPort as any);
     }
-  }, [data, id, SetPort]);
+  }, [data, id, SetPort, loading]);
 
-  if (!data && loading) return <FallBackSpinner />;
+  if (!currentUser)
+    window.location.href = `https://5f2c144a3db416902c67d5bd--boring-noyce-43e1ba.netlify.app/${id}`;
   if (!data && !loading)
     return (
       <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
@@ -75,7 +81,10 @@ const PortfolioPage = ({
 const mapStateToProps = (state: MyReducers) => {
   return {
     loader: state.loadReducer.isLoading,
+<<<<<<< HEAD
     currentPort: state.portReducer.currentPort,
+=======
+>>>>>>> efaac09e236f69eadcbf7fb6d185ab1dfac5dd1a
     currentUser: state.userReducer.currentUser,
   };
 };

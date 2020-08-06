@@ -9,7 +9,10 @@ export const useMiddleWares = (app: Express) => {
   }
   app.use(
     cors({
+<<<<<<< HEAD
       // origin: "http://portfolio-easy.herokuapp.com/",
+=======
+>>>>>>> efaac09e236f69eadcbf7fb6d185ab1dfac5dd1a
       credentials: true,
     })
   );
