@@ -30,7 +30,7 @@ const Home = ({ currentUser, ports }: Props): React.ReactElement => {
     if (ports.find((p) => p.handlePath === path)) {
       history.push(`/port/${path}`);
     }
-  }, [ports]);
+  }, [ports, history]);
 
   return (
     <HomeContainer>
