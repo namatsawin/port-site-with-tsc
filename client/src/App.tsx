@@ -27,6 +27,7 @@ const App = (): React.ReactElement => {
     }
   }, [data]);
 
+  if (loading) return <Spinner isLoading={loading} />;
   return (
     <OffSetContextProvider>
       <AlertMessage />
@@ -37,7 +38,6 @@ const App = (): React.ReactElement => {
           <Route path="/port/:id" component={PortfolioPage} />{" "}
         </ErrorBoundary>
       </Switch>
-      <Spinner isLoading={loading} />
     </OffSetContextProvider>
   );
 };
