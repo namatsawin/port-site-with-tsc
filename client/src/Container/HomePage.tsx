@@ -39,7 +39,7 @@ const Home = ({ currentUser, ports }: Props): React.ReactElement => {
       >
         {currentUser ? (
           <div style={{ margin: "auto" }}>
-            <LinkNoneStyle to={`/${currentUser.username}`}>
+            <LinkNoneStyle to={`/port/${currentUser.username}`}>
               <Button variant="contained" color="secondary" size="large">
                 Go to my port
               </Button>
