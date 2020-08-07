@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import styled from "styled-components";
 import AuthButton from "../Components/AuthButton";
@@ -22,8 +22,15 @@ const HomeContainer = styled.div`
 const Home = ({ currentUser, ports }: Props): React.ReactElement => {
   const history = useHistory();
   const handleChange = (event: any, values: any) => {
-    history.push(`/${values.handlePath}`);
+    history.push(`/port/${values.handlePath}`);
   };
+
+  useEffect(() => {
+    const path = window.location.search.slice(1);
+    if (ports.find((p) => p.handlePath === path)) {
+      history.push(`/port/${path}`);
+    }
+  }, [ports]);
 
   return (
     <HomeContainer>

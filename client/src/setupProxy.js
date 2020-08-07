@@ -2,9 +2,9 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
   app.use(
-    ["/auth", "/api", "/graphql", "/portfolio"],
+    ["/auth", "/api", "/graphql", "/port"],
     createProxyMiddleware({
-      target: "http://localhost:8080",
+      target: "http://localhost:5000",
     })
   );
 };

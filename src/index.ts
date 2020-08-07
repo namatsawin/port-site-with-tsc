@@ -28,12 +28,12 @@ import { PortfolioModel } from "./entity/Portfolio";
     res.send(ports);
   });
 
-  app.get("/portfolio/:id", async (req, res) => {
+  app.get("/port/:id", async (req, res) => {
     const port = await PortfolioModel.findOne({ handlePath: req.params.id });
     if (port) {
-      res.redirect(`/${req.params.id}`);
+      res.redirect(`https://portfolio-care.herokuapp.com/?${req.params.id}`);
     } else {
-      res.redirect("/");
+      res.redirect(`https://portfolio-care.herokuapp.com/`);
     }
   });
 
@@ -60,5 +60,5 @@ import { PortfolioModel } from "./entity/Portfolio";
     });
   }
 
-  app.listen(process.env.PORT || 8080);
+  app.listen(process.env.PORT || 5000);
 })();

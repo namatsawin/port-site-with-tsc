@@ -20,7 +20,7 @@ const EditLanding = ({
   const { url } = useRouteMatch() as myMatch;
 
   const history = useHistory();
-  const userId = url.split("/")[1];
+  const userId = url.split("/")[2];
 
   const [editLanding] = useEditLandingMutation();
   const onSubmit = async (values: LandingInput) => {
