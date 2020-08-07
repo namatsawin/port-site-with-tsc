@@ -21,7 +21,6 @@ const HomeContainer = styled.div`
 
 const Home = ({ currentUser, ports }: Props): React.ReactElement => {
   const history = useHistory();
-
   const handleChange = (event: any, values: any) => {
     history.push(`/${values.handlePath}`);
   };

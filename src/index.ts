@@ -28,6 +28,15 @@ import { PortfolioModel } from "./entity/Portfolio";
     res.send(ports);
   });
 
+  app.get("/portfolio/:id", async (req, res) => {
+    const port = await PortfolioModel.findOne({ handlePath: req.params.id });
+    if (port) {
+      res.redirect(`/${req.params.id}`);
+    } else {
+      res.redirect("/");
+    }
+  });
+
   const schema = await buildSchema({
     resolvers: [UserResolver, PortResolver],
     emitSchemaFile: { path: "src/schema.graphql" },
@@ -51,5 +60,5 @@ import { PortfolioModel } from "./entity/Portfolio";
     });
   }
 
-  app.listen(process.env.PORT || 5000);
+  app.listen(process.env.PORT || 8080);
 })();

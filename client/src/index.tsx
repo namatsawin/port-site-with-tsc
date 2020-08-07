@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import store from "./redux/store";
 import ApolloClient from "apollo-boost";
-
+import { BrowserRouter } from "react-router-dom";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -17,7 +17,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client as any}>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </ApolloProvider>,
   document.querySelector("#root")
