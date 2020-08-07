@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useMeQuery } from "./generated/graphql";
 import store from "./redux/store";
 import Spinner from "./portal/Spinner";
@@ -12,7 +12,6 @@ import FallBackSpinner from "./Components/FallBackSpinner";
 
 const HomePage = lazy(() => import("./Container/HomePage"));
 const PortfolioPage = lazy(() => import("./Container/PortfolioPage"));
-const PageNotFound = lazy(() => import("./Container/PageNotFound"));
 
 axios
   .get("/api/portfolios")
@@ -39,15 +38,6 @@ const App = (): React.ReactElement => {
           <Suspense fallback={<FallBackSpinner />}>
             <Route exact path="/" component={HomePage} />
             <Route path="/port/:id" component={PortfolioPage} />
-            <Route
-              render={() => {
-                return window.location.search ? (
-                  <Redirect to="/" />
-                ) : (
-                  <PageNotFound />
-                );
-              }}
-            />
           </Suspense>
         </ErrorBoundary>
       </Switch>
