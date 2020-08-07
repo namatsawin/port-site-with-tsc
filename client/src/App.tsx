@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useMeQuery } from "./generated/graphql";
 import store from "./redux/store";
@@ -7,9 +7,8 @@ import { OffSetContextProvider } from "./Context/storeOffset";
 import LogoutButton from "./Components/LogoutButton";
 import AlertMessage from "./Components/AlertMessage";
 import ErrorBoundary from "./Components/ErrorBoundary";
-import HomePage from "./Container/HomePage";
-import PortfolioPage from "./Container/PortfolioPage";
 import axios from "axios";
+import FallBackSpinner from "./Components/FallBackSpinner";
 
 axios
   .get("/api/portfolios")
@@ -17,6 +16,9 @@ axios
     store.dispatch({ type: "SetPorts", payload: res.data });
   })
   .catch((err) => console.error(err));
+
+const HomePage = lazy(() => import("./Container/HomePage"));
+const PortfolioPage = lazy(() => import("./Container/PortfolioPage"));
 
 const App = (): React.ReactElement => {
   const { data, loading } = useMeQuery();
@@ -27,17 +29,19 @@ const App = (): React.ReactElement => {
     }
   }, [data]);
 
-  if (loading) return <Spinner isLoading={loading} />;
   return (
     <OffSetContextProvider>
       <AlertMessage />
       <LogoutButton />
       <Switch>
         <ErrorBoundary>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/port/:id" component={PortfolioPage} />{" "}
+          <Suspense fallback={<FallBackSpinner />}>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/port/:id" component={PortfolioPage} />
+          </Suspense>
         </ErrorBoundary>
       </Switch>
+      <Spinner isLoading={loading} />
     </OffSetContextProvider>
   );
 };
